@@ -11,4 +11,7 @@ router.get("/new", flightsCtrl.new);
 /* POST */
 router.post("/", flightsCtrl.create);
 
+/* DELETE */
+router.delete("/:id", flightsCtrl.delete);
+
 export { router };

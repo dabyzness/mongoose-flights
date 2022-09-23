@@ -29,4 +29,15 @@ function create(req, res) {
     });
 }
 
-export { index, newFlight as new, create };
+function deleteFlight(req, res) {
+  Flight.findByIdAndDelete(req.params.id)
+    .then((flight) => {
+      res.redirect("/flights");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/flights");
+    });
+}
+
+export { index, newFlight as new, create, deleteFlight as delete };
