@@ -16,4 +16,6 @@ function index(req, res) {
 
 function newFlight(req, res) {}
 
-export { index, newFlight as new };
+function create(req, res) {}
+
+export { index, newFlight as new, create };
