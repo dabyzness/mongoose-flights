@@ -1,2 +1,29 @@
-<%- include("./partials/html-head") %> <%- include("./partials/nav") %> <%-
-include("./partials/footer") %>
+<%- include("./partials/html-head") %> <%- include("./partials/nav") %>
+
+<main>
+  <h1>Flight List</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Airline</th>
+        <th>Flight No.</th>
+        <th>Airport</th>
+        <th>Departure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flights.forEach(flight => { %>
+
+      <tr>
+        <td><%= flight.airline %></td>
+        <td><%= flight.flightNo %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.departure %></td>
+      </tr>
+
+      <% }) %>
+    </tbody>
+  </table>
+</main>
+
+<%-include("./partials/footer") %>
