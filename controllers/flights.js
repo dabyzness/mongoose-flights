@@ -19,6 +19,8 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
+  req.body.departs =
+    req.body.departs || new Date().setFullYear(new Date().getFullYear() + 1);
   Flight.create(req.body)
     .then((flight) => {
       res.redirect("/flights");
