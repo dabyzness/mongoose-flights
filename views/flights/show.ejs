@@ -1,2 +1,10 @@
 <%- include("../partials/html-head") %> <%- include("../partials/nav") %>
+
+<main>
+  <h1>Flight Info</h1>
+  <p>Flying: <%= flight.airline %> <%= flight.flightNo %></p>
+  <p>From: <%= flight.airport %></p>
+  <p>Departure Date: <%= flight.departs.toLocaleDateString() %></p>
+  <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
+</main>
 <%-include("../partials/footer") %>
