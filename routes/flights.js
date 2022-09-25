@@ -6,11 +6,11 @@ const router = Router();
 /* GET */
 router.get("/", flightsCtrl.index);
 
+router.get("/new", flightsCtrl.new);
+
 router.get("/:id", flightsCtrl.show);
 
 router.get("/:id/edit", flightsCtrl.edit);
-
-router.get("/new", flightsCtrl.new);
 
 /* POST */
 router.post("/", flightsCtrl.create);
