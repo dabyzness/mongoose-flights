@@ -19,8 +19,7 @@ function newFlight(req, res) {
 }
 
 function create(req, res) {
-  req.body.departs =
-    req.body.departs || new Date().setFullYear(new Date().getFullYear() + 1);
+  !req.body.departs ? delete req.body.departs : null;
   Flight.create(req.body)
     .then((flight) => {
       res.redirect("/flights");
@@ -81,6 +80,27 @@ function submitEdit(req, res) {
     });
 }
 
+function createTicket(req, res) {
+  req.body.seat = req.body.seatChar + req.body.seatNo;
+  Flight.findById(req.params.id)
+    .then((flight) => {
+      flight.tickets.push({ seat: req.body.seat, price: req.body.price });
+      flight
+        .save()
+        .then(() => {
+          res.redirect(`/flights/${flight._id}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.redirect("/flights");
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/flights");
+    });
+}
+
 export {
   index,
   newFlight as new,
@@ -89,4 +109,5 @@ export {
   show,
   edit,
   submitEdit,
+  createTicket,
 };

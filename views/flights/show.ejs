@@ -6,5 +6,53 @@
   <p>From: <%= flight.airport %></p>
   <p>Departure Date: <%= flight.departs.toLocaleDateString() %></p>
   <a href="/flights/<%= flight._id %>/edit">Edit Flight</a>
+  <br />
+
+  <form action="/flights/<%= flight._id %>/tickets" method="post">
+    <label for="seatChar">Seat Selection</label>
+    <select name="seatChar" id="seatChar">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="E">E</option>
+      <option value="F">F</option>
+    </select>
+
+    <input
+      type="number"
+      name="seatNo"
+      id="seatNo"
+      min="1"
+      max="99"
+      placeholder="1-99"
+    />
+
+    <label for="price">$</label>
+    <input type="number" name="price" id="price" min="0" />
+
+    <button type="submit">Add Ticket</button>
+  </form>
+  <% if(flight.tickets.length) { %>
+  <table>
+    <thead>
+      <tr>
+        <th>Seat</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flight.tickets.forEach(ticket => { %>
+      <tr>
+        <td><%= ticket.seat %></td>
+        <td><%= ticket.price %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <% } else { %>
+  <h3>No tickets to Display</h3>
+  <% } %>
 </main>
 <%-include("../partials/footer") %>
