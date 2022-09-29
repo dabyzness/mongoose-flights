@@ -15,14 +15,27 @@ function newMeal(req, res) {
 }
 
 function create(req, res) {
-  Meal.create(req.body)
-    .then((meal) => {
+  req.body.name = formatString(req.body.name);
+  Meal.find({ name: req.body.name }).then((meal) => {
+    console.log(meal);
+    if (meal.length) {
       res.redirect("/meals/new");
-    })
-    .catch((err) => {
-      console.log(err);
-      res.redirect("/meals/new");
-    });
+      return;
+    }
+    Meal.create(req.body)
+      .then((meal) => {
+        res.redirect("/meals/new");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.redirect("/meals/new");
+      });
+  });
+}
+
+function formatString(str) {
+  const temp = str.toLowerCase();
+  return temp.charAt(0).toUpperCase() + temp.slice(1);
 }
 
 export { newMeal as new, create };

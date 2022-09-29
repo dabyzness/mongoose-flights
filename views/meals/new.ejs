@@ -2,6 +2,13 @@
 
 <h1>Add Meal</h1>
 
+<label for="mealIncluded">Current Meals</label>
+<select name="mealName" id="mealIncluded">
+  <% meals.forEach(meal => { %>
+  <option value="<%= meal.name %>"><%= meal.name %></option>
+  <% }) %>
+</select>
+
 <form action="/meals" method="post">
   <label for="mealName">Name of Meal</label>
   <input type="text" name="name" id="mealName" />
